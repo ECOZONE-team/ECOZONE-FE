@@ -36,8 +36,7 @@ jobs:
     - name: Set npm registry to npmjs
       run: |
         npm config set registry "https://registry.npmjs.org/"
-        npm config set always-auth false
-        npm config list
+        npm config list | grep registry
 
     - name: Install & Build
       env:

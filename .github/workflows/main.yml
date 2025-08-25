@@ -37,12 +37,15 @@ jobs:
       run: |
         npm config set registry "https://registry.npmjs.org/"
         npm config list | grep registry
+        
+    - name: Install (Vite + TS)
+      run: |
+        npm ci --no-audit --no-fund --include=dev
 
-    - name: Install & Build
+    - name: Build
       env:
         NODE_ENV: production
       run: |
-        npm ci --no-audit --no-fund
         npm run build
         echo "--- build output ---"
         ls -la

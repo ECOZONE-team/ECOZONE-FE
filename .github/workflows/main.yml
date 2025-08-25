@@ -8,7 +8,7 @@ on:
 
 env:
   AWS_REGION: ap-northeast-2              # 버킷·배포가 있는 리전
-  S3_BUCKET: my-static-site-prod          # S3 버킷 이름
+  S3_BUCKET: ecozone-client               # S3 버킷 이름
   CLOUDFRONT_DIST_ID: E2BI4WAO9XPJBF      # CloudFront 배포 ID
   BUILD_DIR: dist                         # 로컬 빌드 산출물 폴더
 

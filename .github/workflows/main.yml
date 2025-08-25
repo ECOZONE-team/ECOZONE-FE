@@ -60,18 +60,28 @@ jobs:
       with:
         role-to-assume: arn:aws:iam::056445322590:role/github-action-deploy
         aws-region: ${{ env.AWS_REGION }}
+        
+    - name: Who am I?
+      run: |
+        aws sts get-caller-identity
+        aws s3 ls "s3://${S3_BUCKET}" || true
 
     # ────────────────────────
     # 3️. S3 동기화
     # ────────────────────────
-    - name: Sync to S3
-      uses: jakejarvis/s3-sync-action@v0.5.1
-      with:
-        args: --delete --cache-control "public,max-age=31536000,immutable"
-      env:
-        SOURCE_DIR: ${{ env.BUILD_DIR }}
-        AWS_S3_BUCKET: ${{ env.S3_BUCKET }}
-        AWS_REGION:   ${{ env.AWS_REGION }}
+    - name: Sync static assets to S3 (long cache)
+      run: |
+        aws s3 sync "${BUILD_DIR}" "s3://${S3_BUCKET}" \
+          --delete \
+          --exclude "index.html" --exclude "*.html" \
+          --cache-control "public,max-age=31536000,immutable"
+          
+    - name: Upload HTML to S3 (short cache)
+      run: |
+          aws s3 sync "${BUILD_DIR}" "s3://${S3_BUCKET}" \
+            --delete \
+            --exclude "*" --include "*.html" \
+            --cache-control "public,max-age=60"
 
     # ────────────────────────
     # 4️. CloudFront 무효화

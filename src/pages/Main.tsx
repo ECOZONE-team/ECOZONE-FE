@@ -31,6 +31,9 @@ import {
   MainImage,
   B,
   Strip,
+  ImageTitle,
+  Content,
+  ImageWrapper,
 } from "../styles/main/main.styles";
 import image1 from "../assets/main/function1.png";
 import application1 from "../assets/main/application1.png";
@@ -38,7 +41,7 @@ import application2 from "../assets/main/application2.png";
 import application3 from "../assets/main/application3.png";
 import application4 from "../assets/main/application4.png";
 import image2 from "../assets/main/report.png";
-import image3 from "../assets/main/main_image2.png";
+import image3 from "../assets/main/main_image3.png";
 
 const Main: React.FC = () => {
   return (
@@ -144,7 +147,14 @@ const Main: React.FC = () => {
         </StatsGrid>
       </StatsSection>
 
-      <MainImage src={image3} />
+      <ImageWrapper>
+        <MainImage src={image3} />
+        <ImageTitle>
+          환경측정 보고서 제작 자동화의 시작, <br />
+          에코존(Eco-Zone)
+        </ImageTitle>
+        <Content>환경 규제 대응, 쉽고 똑똑하게</Content>
+      </ImageWrapper>
     </MainContainer>
   );
 };

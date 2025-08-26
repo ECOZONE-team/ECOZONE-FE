@@ -3,7 +3,6 @@ import MainBackground from "../../assets/main/main_image.png";
 
 export const MainContainer = styled.main`
   width: 100vw;
-  min-height: 100vh;
   overflow-x: hidden;
 `;
 
@@ -280,9 +279,32 @@ export const ReportSubtitle = styled.p`
   color: #3498db;
   margin-bottom: 60px;
 `;
+export const ImageWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 384px;
+`;
 
 export const MainImage = styled.img`
   width: 100%;
   height: 384px;
   object-fit: cover;
+  margin-bottom: -7px;
+`;
+
+export const ImageTitle = styled.div`
+  position: absolute;
+  top: 80px;
+  left: 120px;
+  color: #282828;
+  font-size: 48px;
+  font-weight: bold;
+`;
+
+export const Content = styled.div`
+  position: absolute;
+  top: 230px;
+  left: 120px;
+  color: #282828;
+  font-size: 20px;
 `;

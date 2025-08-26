@@ -64,17 +64,16 @@ export const Title = styled.h2`
 
 export const PlanList = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 16px;
 `;
 
 export const Plan = styled.div<{ selected: boolean }>`
   border: 2px solid ${({ selected }) => (selected ? "#3f67ef" : "#e0e0e0")};
   border-radius: 16px;
   padding: 24px;
-  width: 389px;
+  width: 360px;
   height: 402px;
-  margin-right: 16px;
   background: #fff;
   cursor: pointer;
   transition: all 0.3s ease;

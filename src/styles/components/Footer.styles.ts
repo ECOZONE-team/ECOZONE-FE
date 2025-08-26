@@ -2,21 +2,27 @@ import styled from "styled-components";
 
 export const CompanyInfo = styled.div`
   background: #282828;
-  padding: 40px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  flex-wrap: wrap;
+  padding: 40px 120px;
+  width: 100vw;
+  box-sizing: border-box;
+  height: 250px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px 20px;
+  }
 `;
 
 export const CompanyText = styled.div`
   color: #ffffff;
-  line-height: 1.6;
-  max-width: 70%;
+  max-width: 600px;
 `;
 
 export const CompanyName = styled.h3`
-  font-size: 1.5rem;
+  font-size: 16px;
   font-weight: 600;
   color: #ffffff;
   margin-bottom: 8px;
@@ -29,7 +35,16 @@ export const CompanyDetails = styled.p`
 export const CompanyLinks = styled.div`
   color: #ffffff;
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
   font-weight: 500;
-  margin-top: 4px;
+  text-align: right;
+
+  span {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;

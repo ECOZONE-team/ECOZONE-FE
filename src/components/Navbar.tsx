@@ -37,10 +37,16 @@ const Navbar: React.FC = () => {
     // ✅ 각 메뉴에 맞는 라우트로 이동
     switch (menu) {
       case "솔루션 소개":
-        navigate("/");
+        navigate("/solution");
         break;
       case "요금제 및 구매":
         navigate("/pricing");
+        break;
+      case "고객센터":
+        navigate("/customer-service");
+        break;
+      case "로그인/회원가입":
+        navigate("/login");
         break;
     }
   };

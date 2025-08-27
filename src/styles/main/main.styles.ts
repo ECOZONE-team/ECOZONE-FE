@@ -44,13 +44,13 @@ export const HeroContent = styled.div`
 `;
 
 export const MainTitle = styled.h1`
+  ${({ theme }) => theme.fonts.emphasisTitle};
   padding-top: 201px;
-  font-size: 40px;
   color: black;
 `;
 
 export const MainSubtitle = styled.p`
-  font-size: 20px;
+  ${({ theme }) => theme.fonts.bodyRegular};
   color: black;
 `;
 
@@ -67,6 +67,7 @@ export const FeatureHighlight = styled.div`
 `;
 
 export const CTAButton = styled.button`
+  ${({ theme }) => theme.fonts.bodyEmphasis};
   background: #3f67ef;
   width: 215px;
   height: 50px;
@@ -119,9 +120,6 @@ export const FeatureItem = styled.div`
   display: flex;
   align-items: center;
   margin: 22px 0;
-  &:hover {
-    transform: translateY(-10px);
-  }
 `;
 
 export const FeatureNumber = styled.div`
@@ -141,9 +139,8 @@ export const FeatureNumber = styled.div`
   }
 `;
 
-export const FeatureText = styled.span`
-  font-size: 20px;
-  font-weight: 500;
+export const FeatureText = styled.div`
+  ${({ theme }) => theme.fonts.bodyRegular};
   color: #000000;
 `;
 
@@ -169,9 +166,6 @@ export const FieldCard = styled.div`
 `;
 
 export const FieldIcon = styled.img`
-  &:hover {
-    transform: translateY(-10px);
-  }
   width: 288px;
   height: 187px;
   border-radius: 10px;
@@ -181,10 +175,6 @@ export const FieldTitle = styled.h3`
   font-size: 20px;
   font-weight: 600;
   margin-top: 16px;
-  &:hover {
-    transform: translateY(-10px);
-    color: #3f67ef;
-  }
 `;
 
 // 네 번째 섹션 - 통계

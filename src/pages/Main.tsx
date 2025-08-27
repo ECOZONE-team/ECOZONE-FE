@@ -42,8 +42,19 @@ import application3 from "../assets/main/application3.png";
 import application4 from "../assets/main/application4.png";
 import image2 from "../assets/main/report.png";
 import image3 from "../assets/main/main_image3.png";
+import { useNavigate } from "react-router-dom";
 
 const Main: React.FC = () => {
+  const navigate = useNavigate();
+
+  const goToSolution = () => {
+    navigate("/solution");
+  };
+
+  const goToPricing = () => {
+    navigate("/pricing");
+  };
+
   return (
     <MainContainer>
       <HeroSection>
@@ -60,7 +71,7 @@ const Main: React.FC = () => {
             <br />
             환경측정대행사의 업무 효율을 3배 높이는 스마트 솔루션, 에코존
           </MainSubtitle>
-          <CTAButton>솔루션 주요기능 보기</CTAButton>
+          <CTAButton onClick={goToSolution}>솔루션 주요기능 보기</CTAButton>
         </HeroContent>
       </HeroSection>
 
@@ -141,7 +152,7 @@ const Main: React.FC = () => {
               <br />
               <B>직원 3명의 업무를 에코존이 대신합니다.</B>
             </StatsDescription>
-            <StatsButton>요금제 보기</StatsButton>
+            <StatsButton onClick={goToPricing}>요금제 보기</StatsButton>
           </StatsContent>
           <StatsImage src={image2} />
         </StatsGrid>

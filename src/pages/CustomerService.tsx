@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Container,
   MainBox,
@@ -20,7 +19,6 @@ import customerimg from "../assets/customerservice/customer_img.png";
 import { useNavigate } from "react-router-dom";
 
 const CustomerService = () => {
-  const navigate = useNavigate();
   return (
     <Container>
       <MainBox>

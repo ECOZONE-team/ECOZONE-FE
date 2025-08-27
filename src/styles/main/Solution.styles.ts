@@ -6,7 +6,13 @@ export const MainContainer = styled.main`
   overflow-x: hidden;
 `;
 
-// HERO SECTION
+export const VerticalLine = styled.div`
+  width: 1px;
+  height: 96px;
+  background-color: #949494;
+  margin: 0 auto;
+`;
+
 export const HeroSection = styled.section`
   background: url(${MainBackground}) center/cover no-repeat;
   width: 100%;
@@ -19,27 +25,29 @@ export const HeroSection = styled.section`
 
 export const HeroContent = styled.div`
   color: #ffffff;
-  margin-left: 120px;
+  margin-left: 150px;
 `;
 
-export const MainTitle = styled.h1`
-  font-size: 48px;
+export const MainTitle = styled.div`
+  ${({ theme }) => theme.fonts.emphasisTitle};
   color: #282828;
   margin-bottom: 0px;
+  margin-top: -120px;
 `;
 
-export const MainSubtitle = styled.h1`
+export const MainSubtitle = styled.div`
+  ${({ theme }) => theme.fonts.emphasisTitle};
   font-size: 48px;
   color: #3f67ef;
   text-align: center;
-  margin-top: 0px;
+  margin-bottom: 14px;
 `;
 
 export const HeroDescription = styled.div`
+  ${({ theme }) => theme.fonts.bodyRegular};
   color: #ffffff;
-  font-size: 20px;
   text-align: center;
-  margin-top: 120px;
+  margin-top: 12px;
 `;
 
 // SOLUTION SECTION
@@ -50,31 +58,36 @@ export const SolutionSection = styled.section`
 `;
 
 export const SectionTitle = styled.h2`
-  font-size: 32px;
+  ${({ theme }) => theme.fonts.subTitle};
   color: #000000;
   margin-bottom: 40px;
 `;
 
 export const SectionSubtitle = styled.p`
-  font-size: 16px;
-  margin-top: 69px;
+  ${({ theme }) => theme.fonts.detailEmphasis};
+  padding-top: 68px;
   color: #3f67ef;
-  margin-bottom: 5px;
 `;
 
 export const Row = styled.div`
   width: 1200px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  gap: 16px;
   margin-bottom: 120px;
-
+  align-items: center;
   @media (max-width: 768px) {
     flex-direction: column;
     width: 90%;
     gap: 24px;
   }
+`;
+
+export const TitleRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 160px;
 `;
 
 export const Icon = styled.img`
@@ -84,10 +97,9 @@ export const Icon = styled.img`
 `;
 
 export const SubTitle = styled.div`
-  font-size: 20px;
+  ${({ theme }) => theme.fonts.bodyEmphasis};
   color: #3f67ef;
   font-weight: 600;
-  margin-bottom: 12px;
 `;
 
 export const Card = styled.img`
@@ -98,18 +110,30 @@ export const Card = styled.img`
 `;
 
 export const Content = styled.div`
-  max-width: 491px;
-  text-align: left;
+  width: 608px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
+
+export const SecondContent = styled.div`
+  padding-left: 96px;
+  width: 608px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 
 export const Strip = styled.div`
   height: 1px;
-  background-color: #dcdcdc;
-  margin: 12px 0;
+  width: 491px;
+  background-color: #949494;
+  margin-top: 12px;
+  margin-bottom: 10px;
 `;
 
-export const Text = styled.p`
-  font-size: 16px;
-  line-height: 1.6;
+export const Text = styled.div`
+  ${({ theme }) => theme.fonts.detailRegular};
   color: #282828;
+  text-align: left;
 `;

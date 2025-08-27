@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { theme } from "./styles/theme";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Main from "./pages/Main";
@@ -12,20 +14,22 @@ import Solution from "./pages/Solution";
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/purchase" element={<Purchase />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/setpw" element={<Setpw />} />
-        <Route path="/searchpw" element={<Searchpw />} />
-        <Route path="/customer-service" element={<CustomerService />} />
-        <Route path="/solution" element={<Solution />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/purchase" element={<Purchase />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/setpw" element={<Setpw />} />
+          <Route path="/searchpw" element={<Searchpw />} />
+          <Route path="/customer-service" element={<CustomerService />} />
+          <Route path="/solution" element={<Solution />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </ThemeProvider>
   );
 }
 

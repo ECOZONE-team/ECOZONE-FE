@@ -18,7 +18,18 @@ import {
 
 const Purchase = () => {
   const [selectedPlan, setSelectedPlan] = useState("standard");
+  const [payMethod, setPayMethod] = useState("card");
 
+  const handlePayment = () => {
+    let amount = 0;
+    if (selectedPlan === "standard") amount = 299000;
+    if (selectedPlan === "pro") amount = 699000;
+    if (selectedPlan === "enterprise") amount = 1299000;
+
+    const testPaymentUrl = `https://pay.toss.im/test?amount=${amount}&orderId=test-${selectedPlan}`;
+
+    window.location.href = testPaymentUrl;
+  };
   return (
     <Wrapper>
       <Section>
@@ -137,14 +148,27 @@ const Purchase = () => {
             <Label>결제 방법</Label>
             <div style={{ display: "flex", gap: "24px" }}>
               <label>
-                <input type="radio" name="pay" defaultChecked /> 신용카드
+                <input
+                  type="radio"
+                  name="pay"
+                  defaultChecked
+                  checked={payMethod === "card"}
+                  onChange={() => setPayMethod("card")}
+                />{" "}
+                신용카드
               </label>
               <label>
-                <input type="radio" name="pay" /> 계좌이체
+                <input
+                  type="radio"
+                  name="pay"
+                  checked={payMethod === "bank"}
+                  onChange={() => setPayMethod("bank")}
+                />{" "}
+                계좌이체
               </label>
             </div>
           </Row>
-          <PayButton>결제하기</PayButton>
+          <PayButton onClick={handlePayment}>결제하기</PayButton>
         </PaymentBox>
       </Section>
     </Wrapper>

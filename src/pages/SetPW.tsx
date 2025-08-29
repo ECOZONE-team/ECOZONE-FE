@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Container,
   Logo,
@@ -12,7 +11,6 @@ import logo from "../assets/login/logo.png";
 import { useNavigate } from "react-router-dom";
 
 const Setpw = () => {
-  const navigate = useNavigate();
   return (
     <Container>
       <Logo src={logo} />

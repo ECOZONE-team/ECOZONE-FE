@@ -41,37 +41,118 @@ export const Strip = styled.div`
   background-color: #949494;
   width: 1201px;
   height: 2px;
-  margin-top: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 44px;
 `;
 
 export const MiniStrip = styled.div`
-  background-color: #949494;
+  background-color: #282828;
   width: 389px;
   height: 2px;
-  margin: 8px 0;
+  margin-top: 12px;
+  margin-bottom: 12px;
 `;
 
 export const Section = styled.section`
   margin-bottom: 80px;
 `;
 
-export const Title = styled.h2`
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 40px;
+export const Title = styled.div`
+  ${({ theme }) => theme.fonts.subTitle};
+  margin-bottom: 20px;
 `;
 
 export const PlanList = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  width: 1201px;
+  gap: 17px;
+  margin: 0 auto;
+  margin-bottom: 99px;
+`;
+
+export const PricingCard = styled.div`
+  width: 389px;
+  height: 402px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+  position: relative;
+`;
+
+export const PlanName = styled.div`
+  ${({ theme }) => theme.fonts.subTitle};
+  color: #2c3e50;
+  margin-top: 24px;
+  margin-bottom: 8px;
+`;
+
+export const PlanPrice = styled.div`
+  ${({ theme }) => theme.fonts.bodyEmphasis};
+  color: #3f67ef;
+  margin-bottom: 16px;
+`;
+
+export const B = styled.div`
+  color: #3f67ef;
+  ${({ theme }) => theme.fonts.detailEmphasis};
+  position: relative;
+  display: inline-block;
+`;
+export const Check = styled.img`
+  margin-right: 1px;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+`;
+
+export const PlanPeriod = styled.p`
+  ${({ theme }) => theme.fonts.detailRegular};
+  color: #282828;
+  margin-left: 32px;
+  margin-bottom: 32px;
+  margin-top: 40px;
+  text-align: left;
+`;
+
+export const PlanFeatures = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+`;
+
+export const FeatureItem = styled.li`
+  margin-bottom: 8px;
+  margin-left: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+export const FeatureText = styled.span`
+  font-size: 16px;
+  color: #2c3e50;
+  font-weight: 500;
+`;
+
+export const FeatureLink = styled.span`
+  font-size: 0.9rem;
+  color: #3498db;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+export const PurchaseDetail = styled.div`
+  ${({ theme }) => theme.fonts.detailRegular};
+  color: #676767;
 `;
 
 export const Plan = styled.div<{ selected: boolean }>`
   border: 2px solid ${({ selected }) => (selected ? "#3f67ef" : "#e0e0e0")};
   border-radius: 16px;
-  padding: 24px;
   width: 360px;
   height: 402px;
   background: #fff;
@@ -108,19 +189,15 @@ export const Plan = styled.div<{ selected: boolean }>`
 
 export const RadioGroup = styled.div`
   display: flex;
-  gap: 24px;
-  margin-top: 30px;
-
-  label {
-    font-weight: 500;
-  }
+  gap: 16px;
+  margin-top: 20px;
 `;
 
 export const PlanRadio = styled.div`
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
+  align-items: flex-start;
+  width: 389px;
+  flex-direction: column;
 `;
 
 export const PayButton = styled.button`

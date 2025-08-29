@@ -17,11 +17,9 @@ import {
   PlanFeatures,
   FeatureItem,
   FeatureText,
-  FeatureLink,
   FeaturesSection,
   FeaturesTable,
   TableRow,
-  TableCategory,
   TableFeature,
   TableCell,
   PaymentSection,
@@ -33,10 +31,12 @@ import {
   PaymentLabel,
   SectionSubtitle,
   Strip,
+  Check,
 } from "../styles/pricing/pricing.styles";
 import img1 from "../assets/pricing/credit_score.png";
 import img2 from "../assets/pricing/credit_card_clock.png";
 import img3 from "../assets/pricing/receipt_long.png";
+import check from "../assets/pricing/check.png";
 import { useNavigate } from "react-router-dom";
 
 const Pricing: React.FC = () => {
@@ -79,29 +79,29 @@ const Pricing: React.FC = () => {
             <PlanFeatures>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> 관리 시스템
+                  <Check src={check} /> 관리 시스템
                 </FeatureText>
               </FeatureItem>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> 데이터 입력 관리
+                  <Check src={check} /> 데이터 입력 관리
                 </FeatureText>
               </FeatureItem>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> 보고서 PDF 변환
+                  <Check src={check} /> 보고서 PDF 변환
                 </FeatureText>
               </FeatureItem>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> 보고서 자동 제출 <B>(월 100건 이내)</B>
+                  <Check src={check} /> 보고서 자동 제출 <B>(월 100건 이내)</B>
                 </FeatureText>
               </FeatureItem>
             </PlanFeatures>
           </PricingCard>
 
           {/* Pro 플랜 */}
-          <PricingCard featured>
+          <PricingCard>
             <PlanName>Pro</PlanName>
             <PlanPrice>699,000원</PlanPrice>
             <Strip />
@@ -114,27 +114,27 @@ const Pricing: React.FC = () => {
             <PlanFeatures>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> 관리 시스템
+                  <Check src={check} /> 관리 시스템
                 </FeatureText>
               </FeatureItem>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> 데이터 입력 관리
+                  <Check src={check} /> 데이터 입력 관리
                 </FeatureText>
               </FeatureItem>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> 보고서 PDF 생성
+                  <Check src={check} /> 보고서 PDF 생성
                 </FeatureText>
               </FeatureItem>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> <B>전자서명</B>
+                  <Check src={check} /> <B>전자서명</B>
                 </FeatureText>
               </FeatureItem>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> 보고서 자동 제출 <B>(월 300건 이내)</B>
+                  <Check src={check} /> 보고서 자동 제출 <B>(월 300건 이내)</B>
                 </FeatureText>
               </FeatureItem>
             </PlanFeatures>
@@ -154,39 +154,40 @@ const Pricing: React.FC = () => {
             <PlanFeatures>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> 관리 시스템
+                  <Check src={check} /> 관리 시스템
                 </FeatureText>
               </FeatureItem>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> 데이터 입력 관리
+                  <Check src={check} /> 데이터 입력 관리
                 </FeatureText>
               </FeatureItem>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> 보고서 PDF 변환
+                  <Check src={check} /> 보고서 PDF 변환
                 </FeatureText>
               </FeatureItem>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> <B>전자서명</B>
+                  <Check src={check} /> <B>전자서명</B>
                 </FeatureText>
               </FeatureItem>
               <FeatureItem>
                 <FeatureText>
-                  <B>✓</B> 보고서 자동 제출 <B>(무제한)</B>
-                </FeatureText>
-              </FeatureItem>
-
-              <FeatureItem>
-                <FeatureText>
-                  <B>✓ AI 이상 탐지</B>
+                  <Check src={check} /> 보고서 자동 제출 <B>(무제한)</B>
                 </FeatureText>
               </FeatureItem>
 
               <FeatureItem>
                 <FeatureText>
-                  <B>✓ 실시간 알림</B>
+                  <Check src={check} /> <B> AI 이상 탐지</B>
+                </FeatureText>
+              </FeatureItem>
+
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} />
+                  <B>실시간 알림</B>
                 </FeatureText>
               </FeatureItem>
             </PlanFeatures>
@@ -200,8 +201,8 @@ const Pricing: React.FC = () => {
 
         <FeaturesTable>
           <TableRow header>
-            <TableCategory>항목</TableCategory>
-            <TableCell>세부 내용</TableCell>
+            <TableFeature header>항목</TableFeature>
+            <TableCell header>세부 내용</TableCell>
           </TableRow>
 
           <TableRow>
@@ -260,24 +261,24 @@ const Pricing: React.FC = () => {
         <PaymentMethods>
           <PaymentMethod>
             <PaymentIcon src={img1} />
-            <PaymentLabel>카드 및 계좌이체</PaymentLabel>
+            <PaymentLabel>카드 또는 계좌이체</PaymentLabel>
           </PaymentMethod>
 
           <PaymentMethod>
             <PaymentIcon src={img2} />
             <PaymentLabel>
-              회사세금계산서발행
+              정기결제 (자동결제)
               <br />
-              (VAT 포함 발행)
+              API 연동 지원
             </PaymentLabel>
           </PaymentMethod>
 
           <PaymentMethod>
             <PaymentIcon src={img3} />
             <PaymentLabel>
-              세금계산서 발행 안내
+              세금계산서 발행 지원
               <br />
-              (법정, 간이과세자)
+              (월별, 15일 기준)
             </PaymentLabel>
           </PaymentMethod>
         </PaymentMethods>

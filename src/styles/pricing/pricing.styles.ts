@@ -89,9 +89,8 @@ export const PricingSection = styled.section`
   text-align: center;
 `;
 
-export const SectionTitle = styled.h2`
-  font-size: 32px;
-  font-weight: 700;
+export const SectionTitle = styled.div`
+  ${({ theme }) => theme.fonts.subTitle};
   color: #282828;
   margin-bottom: 60px;
   text-align: center;
@@ -100,99 +99,71 @@ export const SectionTitle = styled.h2`
 export const PricingCards = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
-  max-width: 1200px;
+  width: 1201px;
+  gap: 17px;
   margin: 0 auto;
   margin-bottom: 99px;
 `;
 
-export const PricingCard = styled.div<{ featured?: boolean }>`
+export const PricingCard = styled.div`
   width: 388px;
   height: 509px;
   background: white;
-  border-radius: 20px;
-  margin-right: 7px;
-  box-shadow: ${({ featured }) =>
-    featured
-      ? "0 20px 40px rgba(52, 152, 219, 0.3)"
-      : "0 10px 30px rgba(0, 0, 0, 0.1)"};
-  border: ${({ featured }) =>
-    featured ? "3px solid #3498db" : "1px solid #e9ecef"};
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
   position: relative;
-  transition: all 0.3s ease;
-  transform: ${({ featured }) => (featured ? "scale(1.05)" : "scale(1)")};
-
-  &:hover {
-    transform: ${({ featured }) => (featured ? "scale(1.08)" : "scale(1.03)")};
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  }
-
-  ${({ featured }) =>
-    featured &&
-    `
-    &::before {
-      content: "추천";
-      position: absolute;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #3498db, #2980b9);
-      color: white;
-      padding: 8px 24px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-  `}
 `;
 
-export const PlanName = styled.h3`
-  font-size: 32px;
-  font-weight: 700;
+export const PlanName = styled.div`
+  ${({ theme }) => theme.fonts.subTitle};
   color: #2c3e50;
-  margin-bottom: 16px;
+  margin-top: 24px;
+  margin-bottom: 8px;
 `;
 export const Strip = styled.div`
   background-color: #949494;
   width: 324px;
-  margin-left: 32px;
   height: 2px;
-  margin-top: 16px;
   margin-bottom: 24px;
+  margin: 0 auto;
 `;
 
 export const PlanPrice = styled.div`
-  font-size: 20px;
-  font-weight: 700;
+  ${({ theme }) => theme.fonts.bodyEmphasis};
   color: #3f67ef;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 `;
 
 export const B = styled.div`
-  color: blue;
+  color: #3f67ef;
+  ${({ theme }) => theme.fonts.detailEmphasis};
   position: relative;
   display: inline-block;
 `;
+export const Check = styled.img`
+  margin-right: 1px;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+`;
 
 export const PlanPeriod = styled.p`
-  font-size: 16px;
+  ${({ theme }) => theme.fonts.detailRegular};
   color: #282828;
   margin-left: 32px;
   margin-bottom: 32px;
-  line-height: 1.4;
   text-align: left;
 `;
 
 export const PlanFeatures = styled.ul`
   list-style: none;
-
   padding: 0;
   margin: 0;
   text-align: left;
 `;
 
 export const FeatureItem = styled.li`
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   margin-left: 32px;
   display: flex;
   flex-direction: column;
@@ -218,48 +189,50 @@ export const FeatureLink = styled.span`
 
 // 기능 비교 섹션
 export const FeaturesSection = styled.section`
-  padding: 100px 221px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: #fbfcfc;
+  padding-bottom: 150px;
 `;
 
 export const FeaturesTable = styled.div`
-  max-width: 1000px;
+  width: 998px;
   margin: 0 auto;
-  background: white;
-  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 `;
 
 export const TableRow = styled.div<{ header?: boolean }>`
-  display: grid;
+  display: flex;
+  height: 58px;
+  gap: 16px;
+  justify-content: space-between;
   grid-template-columns: 1fr 2fr;
 `;
 
-export const TableCategory = styled.div`
-  background-color: #ffffff;
-  font-size: 20px;
-  color: black;
+export const TableFeature = styled.div<{ header?: boolean }>`
+  ${({ header, theme }) =>
+    header ? theme.fonts.bodyEmphasis : theme.fonts.detailEmphasis};
+  color: #282828;
   text-align: center;
   width: 288px;
-  height: 48px;
+  padding: ${({ header }) => (header ? "16px 0" : "12px 0")};
+  background-color: ${({ header }) => (header ? "#ffffff" : "#FBFCFC")};
+  border-bottom: 1px solid #dedede;
+  box-shadow: ${({ header }) =>
+    header ? "0 2px 6px rgba(0.08, 0.08, 0.08, 0.08)" : "none"};
+  border-radius: ${({ header }) => (header ? "10px" : "0")};
 `;
 
-export const TableFeature = styled.div`
-  padding: 20px 30px;
-  font-weight: 600;
-  color: #2c3e50;
-  background: #f8f9fa;
-`;
-
-export const TableCell = styled.div`
-  background-color: #ffffff;
-  font-size: 20px;
-  color: black;
-  text-align: center;
+export const TableCell = styled.div<{ header?: boolean }>`
+  ${({ header, theme }) =>
+    header ? theme.fonts.bodyEmphasis : theme.fonts.detailRegular};
+  color: #282828;
+  text-align: ${({ header }) => (header ? "center" : "left")};
   width: 694px;
-  margin: 0 auto;
-  height: 48px;
+  padding: ${({ header }) => (header ? "16px 0" : "12px 16px")};
+  background-color: ${({ header }) => (header ? "#ffffff" : "#FBFCFC")};
+  border-bottom: 1px solid #dedede;
+  box-shadow: ${({ header }) =>
+    header ? "0 2px 6px rgba(0.08, 0.08, 0.08, 0.08)" : "none"};
+  border-radius: ${({ header }) => (header ? "10px" : "0")};
 `;
 
 // 결제 섹션

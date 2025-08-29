@@ -4,17 +4,26 @@ import {
   Section,
   Title,
   PlanList,
-  Plan,
-  PlanRadio,
+  PricingCard,
+  Check,
+  FeatureItem,
+  FeatureText,
   PaymentBox,
+  MiniStrip,
+  B,
   Row,
   Label,
   Value,
   Notice,
   RadioGroup,
   PayButton,
+  PlanPeriod,
+  PlanFeatures,
+  PlanRadio,
   Strip,
+  PurchaseDetail,
 } from "../styles/purchase/purchase.styles";
+import check from "../assets/pricing/check.png";
 
 const Purchase = () => {
   const [selectedPlan, setSelectedPlan] = useState("standard");
@@ -36,59 +45,122 @@ const Purchase = () => {
         <Title>솔루션 구매하기</Title>
         <Strip />
         <PlanList>
-          <Plan
-            selected={selectedPlan === "standard"}
-            onClick={() => setSelectedPlan("standard")}
-          >
-            <h4>팀 최대 2개</h4>
-            <h4>현장담당자 최대 5명</h4>
-            <ul>
-              <li>✓ 관리 시스템</li>
-              <li>✓ 데이터 입력 관리</li>
-              <li>✓ 보고서 PDF 변환</li>
-              <li>✓ 보고서 자동 제출 (월 100건 이내)</li>
-            </ul>
-            <p>
-              소규모 환경측정 대행사와 작은 사업장을 정직히 관리하고자 하는 기업
-            </p>
-          </Plan>
+          <PricingCard>
+            <PlanPeriod>
+              팀 최대 <B>2개</B> <br />
+              현장담당자 최대 <B>5명</B>
+            </PlanPeriod>
 
-          <Plan
-            selected={selectedPlan === "pro"}
-            onClick={() => setSelectedPlan("pro")}
-          >
-            <h4>팀 최대 5개</h4>
-            <h4>현장담당자 최대 12명</h4>
-            <ul>
-              <li>✓ 관리 시스템</li>
-              <li>✓ 데이터 입력 관리</li>
-              <li>✓ 보고서 PDF 변환</li>
-              <li>✓ 전자 서명</li>
-              <li>✓ 보고서 자동 제출 (월 300건 이내)</li>
-            </ul>
-            <p>
-              업무 자동화를 확장하고 데이터 관리 정확도와 업무 속도를 높이고
-              싶은 기업
-            </p>
-          </Plan>
+            <PlanFeatures>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> 관리 시스템
+                </FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> 데이터 입력 관리
+                </FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> 보고서 PDF 변환
+                </FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> 보고서 자동 제출 <B>(월 100건 이내)</B>
+                </FeatureText>
+              </FeatureItem>
+            </PlanFeatures>
+          </PricingCard>
 
-          <Plan
-            selected={selectedPlan === "enterprise"}
-            onClick={() => setSelectedPlan("enterprise")}
-          >
-            <h4>팀 제한 없음</h4>
-            <h4>현장담당자 제한 없음</h4>
-            <ul>
-              <li>✓ 관리 시스템</li>
-              <li>✓ 데이터 입력 관리</li>
-              <li>✓ 보고서 PDF 변환</li>
-              <li>✓ 전자 서명</li>
-              <li>✓ 보고서 자동 제출 (무제한)</li>
-              <li>✓ AI 이상 탐지</li>
-              <li>✓ 실시간 알림</li>
-            </ul>
-            <p>전사 환경관리 체계를 구축하고 싶은 기업을 위한 맞춤 솔루션</p>
-          </Plan>
+          {/* Pro 플랜 */}
+          <PricingCard>
+            <PlanPeriod>
+              팀 최대 <B>5개</B>
+              <br />
+              현장담당자 최대 <B>12명</B>
+            </PlanPeriod>
+
+            <PlanFeatures>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> 관리 시스템
+                </FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> 데이터 입력 관리
+                </FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> 보고서 PDF 생성
+                </FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> <B>전자서명</B>
+                </FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> 보고서 자동 제출 <B>(월 300건 이내)</B>
+                </FeatureText>
+              </FeatureItem>
+            </PlanFeatures>
+          </PricingCard>
+
+          {/* Enterprise 플랜 */}
+          <PricingCard>
+            <PlanPeriod>
+              팀 <B>제한 없음</B>
+              <br />
+              현장담당자 <B>제한 없음</B>
+            </PlanPeriod>
+
+            <PlanFeatures>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> 관리 시스템
+                </FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> 데이터 입력 관리
+                </FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> 보고서 PDF 변환
+                </FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> <B>전자서명</B>
+                </FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> 보고서 자동 제출 <B>(무제한)</B>
+                </FeatureText>
+              </FeatureItem>
+
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} /> <B> AI 이상 탐지</B>
+                </FeatureText>
+              </FeatureItem>
+
+              <FeatureItem>
+                <FeatureText>
+                  <Check src={check} />
+                  <B>실시간 알림</B>
+                </FeatureText>
+              </FeatureItem>
+            </PlanFeatures>
+          </PricingCard>
         </PlanList>
 
         <RadioGroup>
@@ -99,7 +171,12 @@ const Purchase = () => {
               checked={selectedPlan === "standard"}
               onChange={() => setSelectedPlan("standard")}
             />
-            Standard 플랜 (299,000원/월)
+            Standard 플랜 <br /> (299,000원/월)
+            <MiniStrip />
+            <PurchaseDetail>
+              소규모 환경측정 대행사로 작은 사업장들을 정확히 <br />
+              관리하고 싶은 기업
+            </PurchaseDetail>
           </PlanRadio>
           <PlanRadio>
             <input
@@ -108,7 +185,13 @@ const Purchase = () => {
               checked={selectedPlan === "pro"}
               onChange={() => setSelectedPlan("pro")}
             />
-            Pro 플랜 (699,000원/월)
+            Pro 플랜 <br /> (699,000원/월)
+            <MiniStrip />
+            <PurchaseDetail>
+              업무 자동화로 환경측정 데이터 관리 정확도와 업무 속도를
+              <br />
+              높이고 싶은 기업
+            </PurchaseDetail>
           </PlanRadio>
           <PlanRadio>
             <input
@@ -117,7 +200,13 @@ const Purchase = () => {
               checked={selectedPlan === "enterprise"}
               onChange={() => setSelectedPlan("enterprise")}
             />
-            Enterprise 플랜 (1,299,000원/월)
+            Enterprise 플랜 <br /> (1,299,000원/월)
+            <MiniStrip />
+            <PurchaseDetail>
+              전사적 환경관리 체계를 구축하고 싶은 기업을 위한
+              <br />
+              맞춤 솔루션{" "}
+            </PurchaseDetail>
           </PlanRadio>
         </RadioGroup>
       </Section>

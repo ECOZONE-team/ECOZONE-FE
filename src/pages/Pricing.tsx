@@ -261,24 +261,24 @@ const Pricing: React.FC = () => {
         <PaymentMethods>
           <PaymentMethod>
             <PaymentIcon src={img1} />
-            <PaymentLabel>카드 및 계좌이체</PaymentLabel>
+            <PaymentLabel>카드 또는 계좌이체</PaymentLabel>
           </PaymentMethod>
 
           <PaymentMethod>
             <PaymentIcon src={img2} />
             <PaymentLabel>
-              회사세금계산서발행
+              정기결제 (자동결제)
               <br />
-              (VAT 포함 발행)
+              API 연동 지원
             </PaymentLabel>
           </PaymentMethod>
 
           <PaymentMethod>
             <PaymentIcon src={img3} />
             <PaymentLabel>
-              세금계산서 발행 안내
+              세금계산서 발행 지원
               <br />
-              (법정, 간이과세자)
+              (월별, 15일 기준)
             </PaymentLabel>
           </PaymentMethod>
         </PaymentMethods>

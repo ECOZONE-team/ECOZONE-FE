@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   CompanyInfo,
   CompanyName,
@@ -7,6 +8,7 @@ import {
 } from "../styles/components/Footer.styles";
 
 const Footer: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <CompanyInfo>
       <CompanyText>
@@ -20,8 +22,8 @@ const Footer: React.FC = () => {
         </CompanyDetails>
       </CompanyText>
       <CompanyLinks>
-        <span>서비스 이용약관</span>
-        <span>개인정보처리방침</span>
+        <span onClick={() => navigate("/terms")}>서비스 이용약관</span>
+        <span onClick={() => navigate("/privacy")}>개인정보처리방침</span>
       </CompanyLinks>
     </CompanyInfo>
   );

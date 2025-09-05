@@ -16,7 +16,7 @@ import {
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const navigate = useNavigate(); // ✅ 추가
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {

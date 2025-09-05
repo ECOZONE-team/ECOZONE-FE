@@ -11,6 +11,8 @@ import Setpw from "./pages/SetPW";
 import Searchpw from "./pages/SearchPW";
 import CustomerService from "./pages/CustomerService";
 import Solution from "./pages/Solution";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <Route path="/searchpw" element={<Searchpw />} />
           <Route path="/customer-service" element={<CustomerService />} />
           <Route path="/solution" element={<Solution />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
         </Routes>
         <Footer />
       </Router>

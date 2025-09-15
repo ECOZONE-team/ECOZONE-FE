@@ -14,6 +14,7 @@ import CustomerService from "./pages/CustomerService";
 import Solution from "./pages/Solution";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/solution" element={<Solution />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/sign-up" element={<Signup />} />
         </Routes>
         <Footer />
       </Router>

@@ -90,24 +90,6 @@ export const LoginButton = styled.div`
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  padding: 10px 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 25px;
-  transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 14px;
-    padding: 8px 16px;
-  }
 `;
 
 export const MobileMenuButton = styled.div`
@@ -119,6 +101,18 @@ export const MobileMenuButton = styled.div`
 
   @media (max-width: 768px) {
     display: flex;
+  }
+`;
+
+export const AuthMenuItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 로그인/회원가입 사이 간격 */
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
   }
 `;
 

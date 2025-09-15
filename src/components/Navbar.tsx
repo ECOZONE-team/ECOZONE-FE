@@ -11,6 +11,7 @@ import {
   MobileMenuLine,
   MobileMenu,
   MobileMenuItem,
+  AuthMenuItem,
 } from "../styles/components/Navbar.styles";
 
 const Navbar: React.FC = () => {
@@ -45,8 +46,11 @@ const Navbar: React.FC = () => {
       case "고객센터":
         navigate("/customer-service");
         break;
-      case "로그인/회원가입":
+      case "로그인":
         navigate("/login");
+        break;
+      case "회원가입":
+        navigate("/sign-up");
         break;
     }
   };
@@ -68,9 +72,15 @@ const Navbar: React.FC = () => {
           <MenuItem onClick={() => handleMenuClick("고객센터")}>
             고객센터
           </MenuItem>
-          <LoginButton onClick={() => handleMenuClick("로그인/회원가입")}>
-            로그인/회원가입
-          </LoginButton>
+          <AuthMenuItem>
+            <LoginButton onClick={() => handleMenuClick("로그인")}>
+              로그인
+            </LoginButton>
+            <p>/</p>
+            <LoginButton onClick={() => handleMenuClick("회원가입")}>
+              회원가입
+            </LoginButton>
+          </AuthMenuItem>
 
           <MobileMenuButton onClick={toggleMobileMenu}>
             <MobileMenuLine isOpen={isMobileMenuOpen} />

@@ -1,9 +1,9 @@
 import axios from "axios";
 import { tokenStorage } from "../utils/token";
 
-const API_BASE_URL = window.location.hostname === "localhost" ? "/api" : "api";
+const API_BASE_URL = "http://13.209.168.11/api";
 
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
@@ -36,7 +36,7 @@ instance.interceptors.response.use(
         return Promise.reject(new Error("No refresh Token"));
       }
       try {
-        const response = await axios.post("/api/auth/reissue", null, {
+        const response = await axios.post("/auth/refresh", null, {
           headers: { RefreshToken: refreshToken },
         });
         const {

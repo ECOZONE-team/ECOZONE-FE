@@ -11,6 +11,7 @@
     "gen:api": "swagger-typescript-api -p http://13.209.168.11/v3/api-docs -o src/api --axios --modular"
   },
   "dependencies": {
+    "@tosspayments/payment-sdk": "^1.9.1",
     "axios": "^1.11.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

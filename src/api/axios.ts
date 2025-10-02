@@ -1,7 +1,7 @@
 import axios from "axios";
 import { tokenStorage } from "../utils/token";
 
-const API_BASE_URL = "https://eco-zone-server.com/swagger-ui/index.html/api";
+const API_BASE_URL = "https://eco-zone-server.com/api";
 
 export const instance = axios.create({
   baseURL: API_BASE_URL,

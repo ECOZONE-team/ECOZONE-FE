@@ -24,49 +24,21 @@ import {
   PurchaseDetail,
 } from "../styles/purchase/purchase.styles";
 import check from "../assets/pricing/check.png";
-import { loadTossPayments } from "@tosspayments/payment-sdk";
-
-type PaymentMethod =
-  | "카드"
-  | "계좌이체"
-  | "가상계좌"
-  | "휴대폰"
-  | "문화상품권"
-  | "게임문화상품권"
-  | "도서문화상품권"
-  | "해외간편결제"
-  | "토스페이"
-  | "토스결제"
-  | "미선택";
 
 const Purchase = () => {
-  const [selectedPlan, setSelectedPlan] = useState<
-    "standard" | "pro" | "enterprise"
-  >("standard");
-  const [payMethod, setPayMethod] = useState<PaymentMethod>("카드");
+  const [selectedPlan, setSelectedPlan] = useState("standard");
+  const [payMethod, setPayMethod] = useState("card");
 
-  const handlePayment = async () => {
+  const handlePayment = () => {
     let amount = 0;
     if (selectedPlan === "standard") amount = 299000;
     if (selectedPlan === "pro") amount = 699000;
     if (selectedPlan === "enterprise") amount = 1299000;
 
-    // ✅ 프론트에서는 clientKey만 사용 (TossPayments 콘솔에서 발급)
-    const tossPayments = await loadTossPayments(
-      "test_ck_0RnYX2w532YoEWnXELPl8NeyqApQ"
-    );
+    const testPaymentUrl = `https://pay.toss.im/test?amount=${amount}&orderId=test-${selectedPlan}`;
 
-    // orderId는 서버에서 생성하는 것이 안전하지만, 테스트용으로 Date 사용 가능
-    await tossPayments.requestPayment(payMethod, {
-      amount,
-      orderId: `order-${Date.now()}`,
-      orderName: encodeURIComponent(`${selectedPlan} Plan Payment`),
-      customerName: encodeURIComponent("Hong"),
-      successUrl: "http://localhost:5173/success",
-      failUrl: "http://localhost:5173/fail",
-    });
+    window.location.href = testPaymentUrl;
   };
-
   return (
     <Wrapper>
       <Section>
@@ -269,8 +241,8 @@ const Purchase = () => {
                   type="radio"
                   name="pay"
                   defaultChecked
-                  checked={payMethod === "카드"}
-                  onChange={() => setPayMethod("카드")}
+                  checked={payMethod === "card"}
+                  onChange={() => setPayMethod("card")}
                 />{" "}
                 신용카드
               </label>
@@ -278,8 +250,8 @@ const Purchase = () => {
                 <input
                   type="radio"
                   name="pay"
-                  checked={payMethod === "계좌이체"}
-                  onChange={() => setPayMethod("계좌이체")}
+                  checked={payMethod === "bank"}
+                  onChange={() => setPayMethod("bank")}
                 />{" "}
                 계좌이체
               </label>

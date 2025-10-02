@@ -1,0 +1,94 @@
+# .github/workflows/deploy-cloudfront.yml
+name: Deploy to CloudFront
+
+on:
+  push:
+    branches: [ "main" ]      # main 에 머지되면 배포
+  workflow_dispatch:          # 수동 실행도 허용
+
+env:
+  AWS_REGION: ap-northeast-2              # 버킷·배포가 있는 리전
+  S3_BUCKET: ecozone-client               # S3 버킷 이름
+  CLOUDFRONT_DIST_ID: E2BI4WAO9XPJBF      # CloudFront 배포 ID
+  BUILD_DIR: dist                         # 로컬 빌드 산출물 폴더
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-22.04
+    permissions:                         # OIDC 방식 IAM 롤을 위한 최소 권한
+      id-token: write
+      contents: read
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    # ────────────────────────
+    # 1️.  애플리케이션 빌드
+    # ────────────────────────
+    - name: Set up Node (LTS)
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm' 
+        
+    - name: Set npm registry to npmjs
+      run: |
+        npm config set registry "https://registry.npmjs.org/"
+        npm config list | grep registry
+        
+    - name: Install (Vite + TS)
+      run: |
+        npm ci --no-audit --no-fund --include=dev
+
+    - name: Build
+      env:
+        NODE_ENV: production
+      run: |
+        npm run build
+        echo "--- build output ---"
+        ls -la
+        echo "--- dist/ ---"
+        ls -la dist || (echo "dist not found!" && exit 1)
+        
+    # ────────────────────────
+    # 2️.  AWS 자격 증명 설정
+    # ────────────────────────
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::056445322590:role/github-action-deploy
+        aws-region: ${{ env.AWS_REGION }}
+        
+    - name: Who am I?
+      run: |
+        aws sts get-caller-identity
+        aws s3 ls "s3://${S3_BUCKET}" || true
+
+    # ────────────────────────
+    # 3️. S3 동기화
+    # ────────────────────────
+    - name: Sync static assets to S3 (long cache)
+      run: |
+        aws s3 sync "${BUILD_DIR}" "s3://${S3_BUCKET}" \
+          --delete \
+          --exclude "index.html" --exclude "*.html" \
+          --cache-control "public,max-age=31536000,immutable"
+          
+    - name: Upload HTML to S3 (short cache)
+      run: |
+          aws s3 sync "${BUILD_DIR}" "s3://${S3_BUCKET}" \
+            --delete \
+            --exclude "*" --include "*.html" \
+            --cache-control "public,max-age=60"
+
+    # ────────────────────────
+    # 4️. CloudFront 무효화
+    #    (HTML·json 같이 자주 바뀌는 파일만 지정)
+    # ────────────────────────
+    - name: Invalidate CloudFront cache
+      run: |
+        aws cloudfront create-invalidation \
+          --distribution-id $CLOUDFRONT_DIST_ID \
+          --paths "/*index.html" "/assets/*.json"

@@ -26,6 +26,7 @@ instance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -33,19 +34,26 @@ instance.interceptors.response.use(
       if (!refreshToken) {
         tokenStorage.clearTokens();
         window.location.href = "/";
-        return Promise.reject(new Error("No refresh Token"));
+        return Promise.reject(new Error("No refresh token"));
       }
+
       try {
-        const response = await axios.post("/auth/refresh", null, {
-          headers: { RefreshToken: refreshToken },
-        });
+        const response = await axios.post(
+          `${API_BASE_URL}/auth/refresh`,
+          null,
+          {
+            headers: { RefreshToken: refreshToken },
+          }
+        );
+
         const {
           accessToken,
           refreshToken: newRefreshToken,
-          userId,
-          role,
-        } = response.data.result;
-        tokenStorage.setTokens(accessToken, newRefreshToken, userId, role);
+          tokenType,
+          expiresInSeconds,
+        } = response.data;
+
+        tokenStorage.setTokens(accessToken, newRefreshToken);
 
         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return instance(originalRequest);

@@ -35,10 +35,13 @@ const Purchase = () => {
     if (selectedPlan === "pro") amount = 699000;
     if (selectedPlan === "enterprise") amount = 1299000;
 
-    const testPaymentUrl = `https://pay.toss.im/test?amount=${amount}&orderId=test-${selectedPlan}`;
+    const orderId = `order_${Date.now()}`;
+
+    const testPaymentUrl = `https://pay.toss.im/test?amount=${amount}&orderId=${orderId}&successUrl=${window.location.origin}/success&failUrl=${window.location.origin}/fail`;
 
     window.location.href = testPaymentUrl;
   };
+
   return (
     <Wrapper>
       <Section>

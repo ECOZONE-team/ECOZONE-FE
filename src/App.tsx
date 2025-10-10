@@ -15,6 +15,8 @@ import Solution from "./pages/Solution";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Signup from "./pages/Signup";
+import Fail from "./pages/Fail";
+import Success from "./pages/Success";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/sign-up" element={<Signup />} />
+          <Route path="/fail" element={<Fail />} />
+          <Route path="/success" element={<Success />} />
         </Routes>
         <Footer />
       </Router>

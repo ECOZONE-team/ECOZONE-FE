@@ -13,29 +13,62 @@ import {
   MobileMenuItem,
   AuthMenuItem,
 } from "../styles/components/Navbar.styles";
+import { tokenStorage } from "../utils/token";
+import axios from "axios";
+import { instance } from "../api/axios";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      setIsLoggedIn(!!tokenStorage.getAccessToken());
+    };
+
+    checkLoginStatus();
+    window.addEventListener("storage", checkLoginStatus);
+    return () => window.removeEventListener("storage", checkLoginStatus);
+  }, []);
+
+  useEffect(() => {
+    const token = tokenStorage.getAccessToken();
+    setIsLoggedIn(!!token);
   }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const handleLogout = async () => {
+    try {
+      const refreshToken = tokenStorage.getRefreshToken();
+
+      await instance.post("/auth/logout");
+
+      tokenStorage.clearTokens();
+      setIsLoggedIn(false);
+      navigate("/");
+    } catch (error) {
+      console.error("로그아웃 실패:", error);
+      tokenStorage.clearTokens();
+      navigate("/");
+    }
+  };
+
   const handleMenuClick = (menu: string) => {
     setIsMobileMenuOpen(false);
 
-    // ✅ 각 메뉴에 맞는 라우트로 이동
     switch (menu) {
       case "솔루션 소개":
         navigate("/solution");
@@ -73,13 +106,19 @@ const Navbar: React.FC = () => {
             고객센터
           </MenuItem>
           <AuthMenuItem>
-            <LoginButton onClick={() => handleMenuClick("로그인")}>
-              로그인
-            </LoginButton>
-            <p>/</p>
-            <LoginButton onClick={() => handleMenuClick("회원가입")}>
-              회원가입
-            </LoginButton>
+            {isLoggedIn ? (
+              <LoginButton onClick={handleLogout}>로그아웃</LoginButton>
+            ) : (
+              <>
+                <LoginButton onClick={() => handleMenuClick("로그인")}>
+                  로그인
+                </LoginButton>
+                <p>/</p>
+                <LoginButton onClick={() => handleMenuClick("회원가입")}>
+                  회원가입
+                </LoginButton>
+              </>
+            )}
           </AuthMenuItem>
 
           <MobileMenuButton onClick={toggleMobileMenu}>
@@ -100,9 +139,13 @@ const Navbar: React.FC = () => {
         <MobileMenuItem onClick={() => handleMenuClick("고객센터")}>
           고객센터
         </MobileMenuItem>
-        <MobileMenuItem onClick={() => handleMenuClick("로그인/회원가입")}>
-          로그인/회원가입
-        </MobileMenuItem>
+        {isLoggedIn ? (
+          <MobileMenuItem onClick={handleLogout}>로그아웃</MobileMenuItem>
+        ) : (
+          <MobileMenuItem onClick={() => handleMenuClick("로그인")}>
+            로그인/회원가입
+          </MobileMenuItem>
+        )}
       </MobileMenu>
     </>
   );

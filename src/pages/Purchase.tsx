@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Wrapper,
   Section,
@@ -25,21 +25,75 @@ import {
 } from "../styles/purchase/purchase.styles";
 import check from "../assets/pricing/check.png";
 
+declare global {
+  interface Window {
+    TossPayments: any;
+  }
+}
+
 const Purchase = () => {
   const [selectedPlan, setSelectedPlan] = useState("standard");
   const [payMethod, setPayMethod] = useState("card");
+  const [tossPayments, setTossPayments] = useState<any>(null);
+  const [tpInstance, setTpInstance] = useState<any>(null);
+  const [widgets, setWidgets] = useState<any>(null);
+
+  const getAmount = () => {
+    if (selectedPlan === "standard") return 299000;
+    if (selectedPlan === "pro") return 699000;
+    if (selectedPlan === "enterprise") return 1299000;
+    return 0;
+  };
+
+  useEffect(() => {
+    if (!window.TossPayments) {
+      console.warn("TossPayments 로딩되지 않음");
+      return;
+    }
+
+    const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm";
+    const tp = window.TossPayments(clientKey);
+    setTpInstance(tp);
+
+    const widgetInstance = tp.widgets({
+      customerKey: "GzDyfo2l-3qeSt3P5im87",
+    });
+
+    widgets.renderPaymentMethods({
+      selector: "#payment-method",
+      variantKey: "DEFAULT",
+    });
+    widgets.renderAgreement({
+      selector: "#agreement",
+      variantKey: "AGREEMENT",
+    });
+
+    setWidgets(widgetInstance);
+  }, []);
+
+  useEffect(() => {
+    if (tossPayments?.widgets) {
+      tossPayments.widgets.setAmount({ currency: "KRW", value: getAmount() });
+    }
+  }, [selectedPlan]);
 
   const handlePayment = () => {
-    let amount = 0;
-    if (selectedPlan === "standard") amount = 299000;
-    if (selectedPlan === "pro") amount = 699000;
-    if (selectedPlan === "enterprise") amount = 1299000;
+    console.log("✅ handlePayment 호출됨");
 
-    const orderId = `order_${Date.now()}`;
+    if (!widgets) {
+      console.warn("❌ widgets 없음");
+      return;
+    }
 
-    const testPaymentUrl = `https://pay.toss.im/test?amount=${amount}&orderId=${orderId}&successUrl=${window.location.origin}/success&failUrl=${window.location.origin}/fail`;
-
-    window.location.href = testPaymentUrl;
+    widgets.requestPayment({
+      orderId: `order_${Date.now()}`,
+      orderName: `${selectedPlan} 플랜 결제`,
+      successUrl: `${window.location.origin}/success`,
+      failUrl: `${window.location.origin}/fail`,
+      customerEmail: "customer123@gmail.com",
+      customerName: "홍길동",
+      customerMobilePhone: "01012345678",
+    });
   };
 
   return (
@@ -260,6 +314,10 @@ const Purchase = () => {
               </label>
             </div>
           </Row>
+
+          <div id="payment-method" style={{ marginTop: "16px" }}></div>
+          <div id="agreement" style={{ marginTop: "16px" }}></div>
+
           <PayButton onClick={handlePayment}>결제하기</PayButton>
         </PaymentBox>
       </Section>

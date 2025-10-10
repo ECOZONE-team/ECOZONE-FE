@@ -65,10 +65,22 @@ const Login = () => {
       <LoginBox>
         <LoginTitle>로그인</LoginTitle>
         <Label>이메일</Label>
-        <Input type="email" placeholder="E-MAIL" />
+        <Input
+          type="email"
+          placeholder="E-MAIL"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+        />
         <Label>비밀번호</Label>
-        <Input type="password" placeholder="PW" />
-        <LoginButton>접속하기</LoginButton>
+        <Input
+          type="password"
+          placeholder="PW"
+          name="password"
+          value={form.password}
+          onChange={handleChange}
+        />
+        <LoginButton onClick={handleSubmit}>접속하기</LoginButton>
         <Links>
           <span onClick={() => navigate("/searchpw")}>비밀번호 찾기</span>
           <Divider />

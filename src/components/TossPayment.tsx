@@ -16,7 +16,7 @@ const TossPaymentWidget: React.FC<TossPaymentWidgetProps> = ({
     PaymentWidgetInstance["renderPaymentMethods"]
   > | null>(null);
 
-  const TOSS_CLIENT_KEY = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!;
+  const TOSS_CLIENT_KEY = import.meta.env.VITE_TOSS_CLIENT_KEY!;
   // 테스트 후 삭제
   console.log("TOSS_CLIENT_KEY:", TOSS_CLIENT_KEY);
   const CUSTOMER_KEY = "test_customer_1234";

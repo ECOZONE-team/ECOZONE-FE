@@ -11,7 +11,6 @@ env:
   S3_BUCKET: ecozone-client # S3 버킷 이름
   CLOUDFRONT_DIST_ID: E2BI4WAO9XPJBF # CloudFront 배포 ID
   BUILD_DIR: dist # 로컬 빌드 산출물 폴더
-  NEXT_PUBLIC_TOSS_CLIENT_KEY: ${{ secrets.NEXT_PUBLIC_TOSS_CLIENT_KEY }}
 
 jobs:
   deploy:
@@ -42,6 +41,11 @@ jobs:
       - name: Install (Vite + TS)
         run: |
           npm ci --no-audit --no-fund --include=dev
+
+      - name: Create .env.production file
+        run: |
+          echo "VITE_TOSS_CLIENT_KEY=${{ secrets.VITE_TOSS_CLIENT_KEY }}" > .env.production
+          echo ".env.production created ✅"
 
       - name: Build
         env:
